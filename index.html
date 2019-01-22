@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=11' />
+    <title>W4W - Documentation</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='css/base.css' rel='stylesheet' />
+    <link href='css/style.css' rel='stylesheet' />
+    <link href='css/railscasts.css' rel='stylesheet' />
+  </head>
+  <body>
+    <!--START--><div id='app'><div class="container unlimiter" data-reactroot="" data-reactid="1" data-react-checksum="-861899071"><div class="fixed-top fixed-right space-left16" data-reactid="2"><div class="fill-light col6 pin-right" data-reactid="3"></div></div><div class="space-top5 scroll-styled overflow-auto pad1 width16 sidebar fixed-left fill-dark dark" data-reactid="4"><div class="pad0x small" data-reactid="5"><div class="small pad0x quiet space-top1" data-reactid="6">Introduction</div><a href="#content-management-api" class="line-height15 pad0x pad00y quiet block " data-reactid="7">Content Management API</a><div class="small pad0x quiet space-top1" data-reactid="8">API</div><a href="#authentication" class="line-height15 pad0x pad00y quiet block " data-reactid="9">Authentication</a><a href="#users" class="line-height15 pad0x pad00y quiet block " data-reactid="10">Users</a><a href="#projects" class="line-height15 pad0x pad00y quiet block " data-reactid="11">Projects</a><a href="#transactions" class="line-height15 pad0x pad00y quiet block " data-reactid="12">Transactions</a></div></div><div class="space-left16" data-reactid="13"><div class="" data-reactid="14"><div class="clearfix" data-reactid="15"><div data-title="Content Management API" class="keyline-top section contain clearfix " data-reactid="16"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="17"><h2 id="content-management-api">Content Management API</h2>
+<p>Waves for Water's Content Management API (CMA) helps you manage the content within the W4W environment. This includes managing content stored in the database, Contentful, and MailChimp.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="18"><h4 id="base-url">Base URL</h4>
+<pre class='hljs'>Production: https://api.wavesforwater.org/v1
+Development: http://localhost:3700/api/v1/</pre>
+</div></div><div data-title="Authentication" class="keyline-top section contain clearfix " data-reactid="19"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="20"><h2 id="authentication">Authentication</h2>
+<p>You access the API securely via HTTPS. For protected routes, it will be unavailable without valid authentication. A valid json web token (JWT) should be passed as a header for all protected routes.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="21"><h4 id="authentication-header">Authentication Header</h4>
+<pre class='hljs'>x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</pre>
+</div></div><div data-title="Users" class="keyline-top section contain clearfix " data-reactid="22"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="23"><h2 id="users">Users</h2>
+</div></div><div data-title="Create User" class="keyline-top section contain clearfix " data-reactid="24"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="25"><h3 id="create-user">Create User</h3>
+<p>Create a user account.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>firstName</code></td>
+<td><code>(required)</code> The user's first name.</td>
+</tr>
+<tr>
+<td><code>lastName</code></td>
+<td><code>(required)</code> The user's last name.</td>
+</tr>
+<tr>
+<td><code>company</code></td>
+<td><code>(optional)</code> The user's company.</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>(required)</code> The user's e-mail.</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td><code>(required)</code> The user's password (sha1 encrypted).</td>
+</tr>
+<tr>
+<td><code>confirmPassword</code></td>
+<td><code>(required)</code> The user's password confirmed (sha1 encrypted).</td>
+</tr>
+<tr>
+<td><code>address.streetAddress</code></td>
+<td><code>(optional)</code> The user's street address.</td>
+</tr>
+<tr>
+<td><code>address.locality</code></td>
+<td><code>(optional)</code> The user's locality locality/city.</td>
+</tr>
+<tr>
+<td><code>address.region</code></td>
+<td><code>(optional)</code> The user's state or province.</td>
+</tr>
+<tr>
+<td><code>address.postalCode</code></td>
+<td><code>(optional)</code> The user's postal code.</td>
+</tr>
+<tr>
+<td><code>address.countryName</code></td>
+<td><code>(optional)</code> The user's country name.</td>
+</tr>
+</tbody>
+</table>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="26"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>POST</div>
+      <div class='pad0 code small endpoint-url'>/api/users</div>
+    </div>
+<h4 id="example-request-body">Example request body</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> user = {
+	<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"Jacob"</span>,
+	<span class="hljs-string">"lastName"</span>: <span class="hljs-string">"Proffer"</span>,
+	<span class="hljs-string">"company"</span>: <span class="hljs-string">"Elegant Seagulls Inc."</span>,
+	<span class="hljs-string">"email"</span>: <span class="hljs-string">"jacob@elegantseagulls.com"</span>,
+    <span class="hljs-string">"password"</span>: <span class="hljs-string">"f862f167b85d41b225785c70d70808bc7337c1fe"</span>,
+    <span class="hljs-string">"confirmPassword"</span>: <span class="hljs-string">"f862f167b85d41b225785c70d70808bc7337c1fe"</span>,
+	<span class="hljs-string">"address"</span>: {
+		<span class="hljs-string">"streetAddress"</span>: <span class="hljs-string">"100 N. 3rd St."</span>,
+		<span class="hljs-string">"locality"</span>: <span class="hljs-string">"Marquette"</span>,
+		<span class="hljs-string">"region"</span>: <span class="hljs-string">"MI"</span>,
+		<span class="hljs-string">"postalCode"</span>: <span class="hljs-string">"49855"</span>,
+		<span class="hljs-string">"countryName"</span>: <span class="hljs-string">"United States"</span>
+	}
+}</pre>
+<h4 id="example-request">Example request</h4>
+<pre class='hljs'>axios.post(<span class="hljs-string">'/api/users'</span>, user)
+  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(response);
+  })
+}</pre>
+<h4 id="example-response">Example response</h4>
+<pre class='hljs'>{
+    <span class="hljs-string">"status"</span>: <span class="hljs-string">"success"</span>,
+    <span class="hljs-string">"userId"</span>: <span class="hljs-number">14234</span>,
+    <span class="hljs-string">"email"</span>: <span class="hljs-string">"jacob@elegantseagulls.com"</span>,
+    <span class="hljs-string">"message"</span>: <span class="hljs-string">"Account created."</span>
+}</pre>
+</div></div><div data-title="List Users" class="keyline-top section contain clearfix " data-reactid="27"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="28"><h3 id="list-users">List Users</h3>
+<p>Lists all users. (limit to 100 users per response)</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="29"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>GET</div>
+      <div class='pad0 code small endpoint-url'>/api/v1/users</div>
+    </div>
+<h4 id="example-request-1">Example request</h4>
+<pre class='hljs'>axios.get(<span class="hljs-string">'/api/v1/users'</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(response);
+  })
+}</pre>
+</div></div><div data-title="Get User" class="keyline-top section contain clearfix " data-reactid="30"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="31"><h3 id="get-user">Get User</h3>
+<p>Retrieve the data for a given user.</p>
+<p><em>Note:</em> To retrieve user data on a different user than the currently authenticated user requires an access level of 5 or greater.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="32"><h4 id="example-request-2">Example request</h4>
+<pre class='hljs'>axios.get(<span class="hljs-string">'/api/v1/user/12345'</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(response);
+  })
+}</pre>
+<h4 id="example-response-1">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"user"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">426</span>,
+    <span class="hljs-attr">"vault_id"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"Jacob"</span>,
+    <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Proffer"</span>,
+    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"jacob@elegantseagulls.com"</span>,
+    <span class="hljs-attr">"company"</span>: <span class="hljs-string">"Elegant Seagulls"</span>,
+    <span class="hljs-attr">"streetAddress"</span>: <span class="hljs-string">"100 N. 3rd St."</span>,
+    <span class="hljs-attr">"locality"</span>: <span class="hljs-string">"Marquette"</span>,
+    <span class="hljs-attr">"region"</span>: <span class="hljs-string">"MI"</span>,
+    <span class="hljs-attr">"postal_code"</span>: <span class="hljs-string">"49855"</span>,
+    <span class="hljs-attr">"country_name"</span>: <span class="hljs-string">"United States"</span>,
+    <span class="hljs-attr">"access_level"</span>: <span class="hljs-number">0</span>
+  }
+}</pre>
+</div></div><div data-title="Projects" class="keyline-top section contain clearfix " data-reactid="33"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="34"><h2 id="projects">Projects</h2>
+</div></div><div data-title="Transactions" class="keyline-top section contain clearfix " data-reactid="35"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="36"><h2 id="transactions">Transactions</h2>
+</div></div></div></div></div><div class="fixed-top space-left16" data-reactid="37"><div class="events fill-light bottom-shadow pad1 col6 pin-topright  " data-reactid="38"><div class="space-right1 small quiet inline" data-reactid="39">Examples shown in:</div><div class="rounded-toggle inline short" data-reactid="40"><a class="strong active" data-reactid="41">JS</a></div><div class="fr pad0" data-reactid="42"><a title="Display as 1 column" style="cursor:pointer;" class="icon quiet caret-left pad0 fill-darken0 round" data-reactid="43"></a></div></div></div><div class="fill-dark dark bottom-shadow fixed-top pad0 width16" data-reactid="44"><a href="/" class="active space-top1 space-left1 pin-topleft icon round dark pad0 fill-es" data-reactid="45"></a><div class="strong small pad0
+          
+          space-left4 line-height15" data-reactid="46">W4W Documentation</div></div></div></div><!--STOP-->
+    <script src='bundle.js'></script>
+  </body>
+</html>
