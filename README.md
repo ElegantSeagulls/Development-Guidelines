@@ -43,7 +43,9 @@
 
 #### Style Linter (@gulls/stylelint-config)
 Style Linter for Styled Components only.
+
 [View on NPM](https://www.npmjs.com/package/@gulls/stylelint-config)
+
 [View Repo](https://github.com/ElegantSeagulls/stylelint-config)
 
 ***
